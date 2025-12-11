@@ -6,6 +6,7 @@ from typing import Dict, List
 from pydantic import BaseModel, Field
 from retrieve_question_details import get_question, get_first_5_answers_arr
 from judge_results import Order, JudgeResults
+import random
 
 load_dotenv()
 
@@ -52,7 +53,7 @@ def orderAnswers(ans, order):
     if order == Order.REVERSED:
         ans.reverse()
     elif order == Order.SHUFFLED:
-        ans.shuffle()
+        random.shuffle(ans)
     answer_str = ""
     for i in range(len(ans)):
         answer_str += "**Answer " + str(i) + ", written by author " + str(ans[i][0]) + "** \n\n" + str(ans[i][1] + "\n\n")
@@ -103,6 +104,7 @@ def get_max_score_for_n_answers(no_of_answers: int):
 # All IDs: '3216013', '60174', '11121352'
 questionIDs = ['3216013', '60174', '11121352', '218384', '14220321', '60174', '1732348', '4660142', '588004', '513832', '12573816', '4261133', '12859942', '203198', '605845', '20279484', '18050071', '750486',
                 '1452721', '23667086', '12769982', '14028959', '11922383', '40480', '3577641', '23294658', '15112125', '13840429', '240178', '3127429', '5554734', '509211', '1299871', '1132941', '10693845']
+
 #questionIDs = ['3216013']
 basePrompt = ['False', "I will give you a stack overflow question, and some answers to it, given by different authors. \
 I want you to return a score for each owner's answer, giving them all in the JSON format specified."]

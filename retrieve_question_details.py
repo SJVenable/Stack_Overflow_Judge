@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import html
-from spreadsheet import Order
+from judge_results import Order
 from numpy import random
 
 # Get the question title and explanation (title and body) in plain text
